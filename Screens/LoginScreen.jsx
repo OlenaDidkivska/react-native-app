@@ -10,7 +10,8 @@ const initialState = {
     password: "",
   };
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ navigation }) => {
+
     const [state, setState] = useState(initialState)
     const [isFocusedEmail, setIsFocusedEmail] = useState(false)
     const [isFocusedPassword, setIsFocusedPassword] = useState(false)
@@ -96,12 +97,15 @@ export const LoginScreen = () => {
             <TouchableOpacity 
               activeOpacity={0.8}
               style={styles.btn}
-              onPress={sendData}>
+                onPress={() => {
+                  sendData();
+                  navigation.navigate("Home")
+              }}>
               <Text style={styles.btnTitle}>Войти</Text>
             </TouchableOpacity>
-            <View style = {styles.checkLogin}>
-              <Text style = {styles.checkLoginText}>Нет аккаунта? Зарегистрироваться</Text>
-            </View>
+            <TouchableOpacity style = {styles.checkLogin} onPress={()=> navigation.navigate("Registration")}>
+              <Text style = {styles.checkLoginText} >Нет аккаунта? Зарегистрироваться</Text>
+            </TouchableOpacity>
           </View>
                 </ImageBackground>
             </KeyboardAvoidingView>
